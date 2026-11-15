@@ -26,6 +26,22 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
 
+      - name: Check project structure
+        run: |
+          pwd
+          ls -la
+          ls -la models
+          ls -la tests
+
+      - name: Set Python path
+        run: |
+          echo "PYTHONPATH=$GITHUB_WORKSPACE" >> "$GITHUB_ENV"
+
+      - name: Check Python import
+        run: |
+          python -c "import sys; print(sys.path)"
+          python -c "import models; print('models OK')"
+
       - name: Run tests
         run: |
           python -m pytest -v
